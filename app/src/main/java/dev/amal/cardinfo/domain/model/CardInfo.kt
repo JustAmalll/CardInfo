@@ -5,11 +5,12 @@ import dev.amal.cardinfo.data.remote.dto.Number
 import dev.amal.cardinfo.data.remote.dto.Country
 
 data class CardInfo(
-    val bank: Bank,
-    val brand: String,
-    val country: Country,
-    val number: Number,
-    val prepaid: Boolean,
-    val scheme: String,
-    val type: String
+    val cardBIN: String?,
+    val bank: Bank?,
+    val brand: String?,
+    val country: Country?,
+    val number: Number?,
+    val prepaid: Boolean?,
+    val scheme: String?,
+    val type: String?
 )

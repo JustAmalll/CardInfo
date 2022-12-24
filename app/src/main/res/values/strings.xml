@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">CardInfo</string>
+    <string name="app_name">Card Info</string>
+
+    // Common
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    // Icon Descriptions
+    <string name="empty_history_icon">Empty History Icon</string>
+    <string name="delete_icon">Delete Icon</string>
+    <string name="credit_card_icon">Credit Card Icon</string>
+
+    // Get Card Info Section
+    <string name="get_card_info">"Get Card Info"</string>
+    <string name="bin_or_iin">BIN/IIN</string>
+    <string name="enter_first_digits">Enter the first digits of a card number (BIN/IIN)</string>
+
+    // Search Result Section
+    <string name="scheme_or_network">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="length">LENGTH</string>
+    <string name="luhn">LUHN</string>
+    <string name="type">TYPE</string>
+    <string name="debit">Debit</string>
+    <string name="credit">Credit</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="country">COUNTRY</string>
+    <string name="latitude">(latitude: \u</string>
+    <string name="longitude">longitude: \u</string>
+    <string name="bank">BANK</string>
+
+    // Confirmation Dialog
+    <string name="confirm_deletion">Confirm deletion</string>
+    <string name="confirm_deletion_subtitle">Are you sure you want to delete all search history ?</string>
+
+    // Empty Search History
+    <string name="empty_search_history">Your search history is empty</string>
+
+    // Search History Section
+    <string name="history">History</string>
+    <string name="clear_all">Clear All</string>
+
 </resources>

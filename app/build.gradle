@@ -76,4 +76,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.3"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
+
+    // Room
+    implementation "androidx.room:room-ktx:2.5.0-rc01"
+    implementation "androidx.room:room-runtime:2.5.0-rc01"
+    kapt "androidx.room:room-compiler:2.5.0-rc01"
+
+    // Swipe to Delete
+    implementation "me.saket.swipe:swipe:1.0.0"
 }
