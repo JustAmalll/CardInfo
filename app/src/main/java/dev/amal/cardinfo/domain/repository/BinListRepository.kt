@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface BinListRepository {
     fun getCardInfo(cardBIN: String): Flow<Resource<CardInfo>>
-    suspend fun getSearchHistory(): List<CardInfo>
-    suspend fun getItemFromSearchHistory(cardBIN: String): CardInfo
-    suspend fun deleteSearchHistoryItem(cardBIN: String)
-    suspend fun deleteAllSearchHistory()
+    suspend fun getHistory(): List<CardInfo>
+    suspend fun getHistoryItemByCardBIN(cardBIN: String): CardInfo
+    suspend fun deleteHistoryItemByCardBIN(cardBIN: String)
+    suspend fun deleteAllHistory()
 }

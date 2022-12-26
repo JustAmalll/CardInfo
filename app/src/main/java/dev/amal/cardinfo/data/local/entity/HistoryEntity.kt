@@ -8,7 +8,7 @@ import dev.amal.cardinfo.data.remote.dto.Country
 import dev.amal.cardinfo.domain.model.CardInfo
 
 @Entity
-data class SearchHistoryEntity(
+data class HistoryEntity(
     @PrimaryKey val id: Int? = null,
     val cardBIN: String,
     val bank: Bank?,
@@ -20,7 +20,7 @@ data class SearchHistoryEntity(
     val type: String?
 )
 
-fun SearchHistoryEntity.toCardInfo(): CardInfo = CardInfo(
+fun HistoryEntity.toCardInfo(): CardInfo = CardInfo(
     cardBIN = cardBIN,
     bank = bank,
     brand = brand,

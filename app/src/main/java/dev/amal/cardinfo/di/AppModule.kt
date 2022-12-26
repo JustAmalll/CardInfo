@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import dev.amal.cardinfo.common.Constants
 import dev.amal.cardinfo.common.Constants.DATABASE_NAME
 import dev.amal.cardinfo.data.local.Converters
-import dev.amal.cardinfo.data.local.SearchHistoryDatabase
+import dev.amal.cardinfo.data.local.HistoryDatabase
 import dev.amal.cardinfo.data.remote.BinListApi
 import dev.amal.cardinfo.data.repository.BinListRepositoryImpl
 import dev.amal.cardinfo.data.util.GsonParser
@@ -33,14 +33,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSearchHistoryDatabase(app: Application): SearchHistoryDatabase =
-        Room.databaseBuilder(app, SearchHistoryDatabase::class.java, DATABASE_NAME)
+    fun provideHistoryDatabase(app: Application): HistoryDatabase =
+        Room.databaseBuilder(app, HistoryDatabase::class.java, DATABASE_NAME)
             .addTypeConverter(Converters(GsonParser(Gson())))
             .build()
 
     @Provides
     @Singleton
     fun provideBinListRepository(
-        api: BinListApi, db: SearchHistoryDatabase
+        api: BinListApi, db: HistoryDatabase
     ): BinListRepository = BinListRepositoryImpl(api, db.dao)
 }

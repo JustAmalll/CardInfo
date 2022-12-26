@@ -31,7 +31,7 @@ import dev.amal.cardinfo.common.ring
 import dev.amal.cardinfo.domain.model.CardInfo
 import dev.amal.cardinfo.presentation.components.CardInfoItem
 import dev.amal.cardinfo.presentation.components.ConfirmationDialog
-import dev.amal.cardinfo.presentation.components.EmptySearchHistory
+import dev.amal.cardinfo.presentation.components.EmptyHistoryContent
 import dev.amal.cardinfo.presentation.components.HistoryCardItem
 import kotlinx.coroutines.flow.collectLatest
 
@@ -51,22 +51,23 @@ fun CardInfoScreen(
     Scaffold(snackbarHost = { SnackbarHost(hostState = snackBarHostState) }) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
-                Column(modifier = Modifier.padding(horizontal = 18.dp)) {
-                    GetCardInfoSection(viewModel = viewModel)
-                    Spacer(Modifier.height(18.dp))
-                    state.cardInfo?.let { cardInfo -> SearchResultSection(cardInfo) }
-                    Spacer(Modifier.height(18.dp))
-                    SearchHistorySection(
-                        isSearchHistoryEmpty = state.searchHistory.isEmpty(),
-                        onDeleteAllSearchHistory = { viewModel.deleteAllSearchHistory() }
-                    )
-                }
+                GetCardInfoSection(viewModel = viewModel)
             }
-            items(state.searchHistory) { searchHistory ->
-                HistoryCardItem(cardBIN = searchHistory.cardBIN!!,
+            item {
+                state.cardInfo?.let { cardInfo -> SearchResultSection(cardInfo) }
+            }
+            item {
+                HistorySection(
+                    isSearchHistoryEmpty = state.history.isEmpty(),
+                    onDeleteAllSearchHistory = { viewModel.deleteAllHistory() }
+                )
+            }
+            items(state.history) { searchHistory ->
+                HistoryCardItem(
+                    cardBIN = searchHistory.cardBIN!!,
                     cardNetwork = searchHistory.scheme!!,
-                    onItemClicked = { cardBin -> viewModel.getItemFromSearchHistory(cardBin) },
-                    onSwipeToDelete = { cardBin -> viewModel.deleteSearchHistoryItem(cardBin) }
+                    onItemClicked = { cardBIN -> viewModel.getHistoryItemByCardBIN(cardBIN) },
+                    onSwipeToDelete = { cardBIN -> viewModel.deleteHistoryItemByCardBIN(cardBIN) }
                 )
             }
         }
@@ -89,8 +90,8 @@ fun GetCardInfoSection(
 ) {
     val focusManager = LocalFocusManager.current
 
-    Column {
-        Spacer(Modifier.height(12.dp))
+    Column(modifier = Modifier.padding(horizontal = 18.dp)) {
+        Spacer(Modifier.height(18.dp))
         Text(
             text = stringResource(id = R.string.get_card_info),
             style = MaterialTheme.typography.h5
@@ -134,7 +135,9 @@ fun SearchResultSection(
     val context = LocalContext.current
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 18.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column {
@@ -256,14 +259,20 @@ fun SearchResultSection(
 }
 
 @Composable
-fun SearchHistorySection(
-    isSearchHistoryEmpty: Boolean, onDeleteAllSearchHistory: () -> Unit
+fun HistorySection(
+    isSearchHistoryEmpty: Boolean,
+    onDeleteAllSearchHistory: () -> Unit
 ) {
     var openDialog by remember { mutableStateOf(false) }
-    if (openDialog) ConfirmationDialog(onDeleteClicked = onDeleteAllSearchHistory,
-        onDialogDismiss = { openDialog = false })
+    if (openDialog) ConfirmationDialog(
+        onDeleteClicked = onDeleteAllSearchHistory,
+        onDialogDismiss = { openDialog = false }
+    )
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp)
+            .padding(top = 18.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -275,5 +284,5 @@ fun SearchHistorySection(
             Text(text = stringResource(id = R.string.clear_all))
         }
     }
-    if (isSearchHistoryEmpty) EmptySearchHistory()
+    if (isSearchHistoryEmpty) EmptyHistoryContent()
 }

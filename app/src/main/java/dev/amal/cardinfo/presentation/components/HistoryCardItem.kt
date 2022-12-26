@@ -28,8 +28,8 @@ import java.util.*
 fun HistoryCardItem(
     cardBIN: String,
     cardNetwork: String,
-    onSwipeToDelete: (cardBin: String) -> Unit,
-    onItemClicked: (cardBin: String) -> Unit
+    onSwipeToDelete: (cardBIN: String) -> Unit,
+    onItemClicked: (cardBIN: String) -> Unit
 ) {
     val swipeToDelete = SwipeAction(
         icon = {
@@ -56,7 +56,7 @@ fun HistoryCardItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
-                .padding(vertical = 12.dp, horizontal = 6.dp),
+                .padding(vertical = 14.dp, horizontal = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {

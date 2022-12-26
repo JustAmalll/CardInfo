@@ -31,7 +31,7 @@ class CardInfoViewModel @Inject constructor(
 
     init {
         // Get search history when screen is shown
-        getSearchHistory()
+        getHistory()
     }
 
     fun getCardInfo() {
@@ -50,7 +50,7 @@ class CardInfoViewModel @Inject constructor(
                             cardInfo = result.data, isLoading = false
                         )
                         // Updating ui after searching card information
-                        getSearchHistory()
+                        getHistory()
                     }
                     is Resource.Error -> {
                         _snackBarEvent.emit(result.message ?: "An unexpected error occurred")
@@ -65,34 +65,34 @@ class CardInfoViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun getSearchHistory() {
+    private fun getHistory() {
         viewModelScope.launch {
-            val result = repository.getSearchHistory()
-            _state.value = state.value.copy(searchHistory = result)
+            val result = repository.getHistory()
+            _state.value = state.value.copy(history = result)
         }
     }
 
-    fun deleteSearchHistoryItem(cardBin: String) {
+    fun deleteHistoryItemByCardBIN(cardBIN: String) {
         viewModelScope.launch {
-            repository.deleteSearchHistoryItem(cardBin)
+            repository.deleteHistoryItemByCardBIN(cardBIN)
             // Updating ui after deleting item
-            getSearchHistory()
+            getHistory()
         }
     }
 
-    fun deleteAllSearchHistory() {
+    fun deleteAllHistory() {
         viewModelScope.launch {
-            repository.deleteAllSearchHistory()
+            repository.deleteAllHistory()
             // Updating ui after deleting all items
-            getSearchHistory()
+            getHistory()
         }
     }
 
-    fun getItemFromSearchHistory(cardBin: String) {
+    fun getHistoryItemByCardBIN(cardBIN: String) {
         // if history item is not item just searched - load from database
-        if (cardBin != state.value.cardInfo?.cardBIN) {
+        if (cardBIN != state.value.cardInfo?.cardBIN) {
             viewModelScope.launch {
-                val result = repository.getItemFromSearchHistory(cardBin)
+                val result = repository.getHistoryItemByCardBIN(cardBIN)
                 _state.value = state.value.copy(cardInfo = result)
             }
         }

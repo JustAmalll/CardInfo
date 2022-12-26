@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import dev.amal.cardinfo.R
 
 @Composable
-fun EmptySearchHistory() {
+fun EmptyHistoryContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -1,8 +1,8 @@
 package dev.amal.cardinfo.data.repository
 
 import dev.amal.cardinfo.common.Resource
-import dev.amal.cardinfo.data.local.SearchHistoryDao
-import dev.amal.cardinfo.data.local.entity.SearchHistoryEntity
+import dev.amal.cardinfo.data.local.HistoryDao
+import dev.amal.cardinfo.data.local.entity.HistoryEntity
 import dev.amal.cardinfo.data.local.entity.toCardInfo
 import dev.amal.cardinfo.data.remote.BinListApi
 import dev.amal.cardinfo.domain.model.CardInfo
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class BinListRepositoryImpl @Inject constructor(
     private val api: BinListApi,
-    private val dao: SearchHistoryDao
+    private val dao: HistoryDao
 ) : BinListRepository {
 
     override fun getCardInfo(cardBIN: String): Flow<Resource<CardInfo>> = flow {
@@ -24,11 +24,11 @@ class BinListRepositoryImpl @Inject constructor(
             val cardInfo = api.getCardInfo(cardBIN)
 
             // Add item only if it is not already in database
-            val searchHistory = dao.getSearchHistory()
+            val searchHistory = dao.getHistory()
             val isItemAlreadyInDb = searchHistory.find { it.cardBIN == cardBIN } != null
             if (!isItemAlreadyInDb) {
                 dao.insertCardData(
-                    SearchHistoryEntity(
+                    HistoryEntity(
                         cardBIN = cardBIN,
                         bank = cardInfo.bank,
                         brand = cardInfo.brand,
@@ -66,15 +66,20 @@ class BinListRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSearchHistory(): List<CardInfo> =
-        dao.getSearchHistory().map { it.toCardInfo() }
+    override suspend fun getHistory(): List<CardInfo> {
+        return dao.getHistory().map { it.toCardInfo() }
+    }
 
-    override suspend fun getItemFromSearchHistory(cardBIN: String): CardInfo =
-        dao.getItemFromSearchHistory(cardBIN).toCardInfo()
+    override suspend fun getHistoryItemByCardBIN(cardBIN: String): CardInfo {
+        return dao.getHistoryItemByCardBIN(cardBIN).toCardInfo()
 
-    override suspend fun deleteSearchHistoryItem(cardBIN: String) =
-        dao.deleteSearchHistoryItem(cardBIN)
+    }
 
-    override suspend fun deleteAllSearchHistory() =
-        dao.deleteAllSearchHistory()
+    override suspend fun deleteHistoryItemByCardBIN(cardBIN: String) {
+        return dao.deleteHistoryItemByCardBIN(cardBIN)
+    }
+
+    override suspend fun deleteAllHistory() {
+        return dao.deleteAllHistory()
+    }
 }
