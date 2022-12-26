@@ -1,11 +1,11 @@
-package dev.amal.cardinfo
+package dev.amal.cardinfo.common.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
+import dev.amal.cardinfo.common.presentation.ui.theme.CardInfoTheme
 import dev.amal.cardinfo.presentation.CardInfoScreen
-import dev.amal.cardinfo.ui.theme.CardInfoTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -7,8 +7,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.amal.cardinfo.common.Constants
-import dev.amal.cardinfo.common.Constants.DATABASE_NAME
+import dev.amal.cardinfo.common.utils.Constants
+import dev.amal.cardinfo.common.utils.Constants.DATABASE_NAME
 import dev.amal.cardinfo.data.local.Converters
 import dev.amal.cardinfo.data.local.HistoryDatabase
 import dev.amal.cardinfo.data.remote.BinListApi

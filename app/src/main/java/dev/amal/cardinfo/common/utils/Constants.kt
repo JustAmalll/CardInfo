@@ -1,4 +1,4 @@
-package dev.amal.cardinfo.common
+package dev.amal.cardinfo.common.utils
 
 object Constants {
     const val BASE_URL = "https://lookup.binlist.net/"

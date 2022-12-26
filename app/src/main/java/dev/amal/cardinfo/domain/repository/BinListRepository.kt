@@ -1,6 +1,6 @@
 package dev.amal.cardinfo.domain.repository
 
-import dev.amal.cardinfo.common.Resource
+import dev.amal.cardinfo.common.utils.Resource
 import dev.amal.cardinfo.domain.model.CardInfo
 import kotlinx.coroutines.flow.Flow
 

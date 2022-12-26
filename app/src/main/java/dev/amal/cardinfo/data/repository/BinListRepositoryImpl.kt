@@ -1,6 +1,6 @@
 package dev.amal.cardinfo.data.repository
 
-import dev.amal.cardinfo.common.Resource
+import dev.amal.cardinfo.common.utils.Resource
 import dev.amal.cardinfo.data.local.HistoryDao
 import dev.amal.cardinfo.data.local.entity.HistoryEntity
 import dev.amal.cardinfo.data.local.entity.toCardInfo

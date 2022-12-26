@@ -7,7 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.amal.cardinfo.common.Resource
+import dev.amal.cardinfo.common.utils.Resource
 import dev.amal.cardinfo.common.removeWhitespaces
 import dev.amal.cardinfo.domain.repository.BinListRepository
 import kotlinx.coroutines.Dispatchers

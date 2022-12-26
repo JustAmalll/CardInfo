@@ -1,4 +1,4 @@
-package dev.amal.cardinfo.ui.theme
+package dev.amal.cardinfo.common.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
